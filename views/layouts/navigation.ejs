@@ -1,0 +1,154 @@
+<% function formatNumber(num) { if (num == null) { return "0"; } return
+num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"); } %>
+<!--------- header section start ------------>
+<style>
+  .logout {
+    --green: #1bfd9c;
+    font-size: 15px;
+    padding: 10px 15px;
+    letter-spacing: 0.06em;
+    position: relative;
+    font-family: inherit;
+    border-radius: 0.6em;
+    overflow: hidden;
+    transition: all 0.3s;
+    line-height: 1.4em;
+    border: 2px solid var(--green);
+    background: linear-gradient(
+      to right,
+      rgba(27, 253, 156, 0.1) 1%,
+      transparent 40%,
+      transparent 60%,
+      rgba(27, 253, 156, 0.1) 100%
+    );
+    color: var(--green);
+    box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4),
+      0 0 9px 3px rgba(27, 253, 156, 0.1);
+  }
+  .logout:hover {
+    color: #82ffc9;
+    box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6),
+      0 0 9px 3px rgba(27, 253, 156, 0.2);
+  }
+  .logout:before {
+    content: "";
+    position: absolute;
+    left: -4em;
+    width: 4em;
+    height: 100%;
+    top: 0;
+    transition: transform 0.4s ease-in-out;
+    background: linear-gradient(
+      to right,
+      transparent 1%,
+      rgba(27, 253, 156, 0.1) 40%,
+      rgba(27, 253, 156, 0.1) 60%,
+      transparent 100%
+    );
+  }
+
+  .logout:hover:before {
+    transform: translateX(15em);
+  }
+  .button-hover {
+    padding: 10px 22px;
+    width: 6em;
+    height: 3em;
+    border-radius: 3em;
+    font-size: 15px;
+    font-family: inherit;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 6px 6px 12px #c5c5c5;
+  }
+  .button-hover:hover {
+    text-decoration: none;
+    color: white;
+  }
+
+  .button-hover::before {
+    content: "";
+    width: 0;
+    height: 3em;
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+    transition: 0.5s ease;
+    display: block;
+    z-index: -1;
+  }
+
+  .button-hover:hover::before {
+    width: 6em;
+  }
+  .hover-img::before {
+    background-image: linear-gradient(to right, #e9b767 0%, #70f7d1 100%);
+  }
+</style>
+<header class="header">
+  <div class="header-1">
+    <a href="" class="logo"><i class="fas fa-book"> bookly</i></a>
+
+    <form action="" class="search-form">
+      <input type="text" name="" placeholder="search here..." id="search-box" />
+      <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+    <div class="icons" style="display: flex">
+      <div id="search-btn" class="fas fa-search"></div>
+
+      <div class="cart-widget">
+        <% if (typeof locals !== 'undefined' && locals.email) { %>
+        <div class="login-block">
+          <a href="/profile" class="font-weight-bold" style="font-size: 15px"
+            ><%= locals.email %></a
+          >
+          <a href="/logout" style="font-size: 15px" class="logout">Logout</a>
+        </div>
+        <% } else { %>
+        <div class="login-block" style="display: flex">
+          <a
+            href="/login"
+            class="font-weight-bold button-hover"
+            style="font-size: 15px; margin: 0px 10px 0px 0px"
+            >SignIn</a
+          ><a
+            class="button-hover hover-img"
+            href="/register"
+            style="font-size: 15px; margin: 0px 0px 0px 10px"
+            >SignUp</a
+          >
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-2">
+    <div class="navbar">
+      <a href="/">home</a>
+      <a href="#featured">featured</a>
+      <a href="#arrivals">arrivals</a>
+      <a href="#reviews">reviews</a>
+      <a href="#blogs">blogs</a>
+    </div>
+  </div>
+</header>
+
+<!--------- header section ends ------------>
+
+<!--------- bottom navbar  ------------>
+
+<div class="bottom-navbar">
+  <a href="#home" class="fas fa-home"></a>
+  <a href="#featured" class="fas fa-list"></a>
+  <a href="#arrivals" class="fas fa-tags"></a>
+  <a href="#reviews" class="fas fa-comments"></a>
+  <a href="#blogs" class="fas fa-app-store"></a>
+</div>
+
+<!-------- login form start ----------->

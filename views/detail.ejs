@@ -1,0 +1,347 @@
+<%- include('layouts/header.ejs') %> <%- include('layouts/navigation.ejs') %>
+<% function formatNumber(num) {
+    if (num == null) {
+      return "0"; 
+     } 
+     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"); } 
+     %>
+
+     
+<style>
+ .button-ouline {
+    border: none;
+    outline: none;
+}
+.rating-widget-block input[type="radio"] {
+    display: none;
+}
+.rating-widget-block label {
+    margin-right: 10px;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 0;
+    display: inline-block;
+}
+.rating-widget-block label:before {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    position: relative;
+    display: block;
+    font-size: 16px;
+    color: #e3e3e3;
+    font-weight: 900;
+}
+.rating-widget-block input:checked ~ label:before,
+.rating-widget-block input:checked ~ label:after {
+    color: #eccd00;
+}
+.rating-widget-block label:after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    display: block;
+    font-size: 16px;
+    color: #fec701;
+    font-weight: 900;
+    bottom: 0;
+    transition: 0.4s;
+    opacity: 0;
+}
+.text-info {
+    border: 1px solid #66ff99;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #555555;
+    margin-right: 10px;
+}
+.text-info:hover {
+    background-color: #66ff99;
+    color: white;
+}
+.text-danger {
+    border: 1px solid #ff3300;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #555555;
+}
+.text-danger:hover {
+    background-color: #ff3300;
+    color: white;
+}
+.rating-block span.star_on {
+    color: #eccd00;
+}
+.fa-star:before {
+    content: "\f005";
+}
+.rating-block span {
+    color: #b6b6b6;
+    font-size: 16px;
+}
+.review-comment .text .author {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.rating-widget-block label:nth-child(1):before { content: ""; }
+.rating-widget-block label:nth-child(2):before { content: ""; }
+.rating-widget-block label:nth-child(3):before { content: ""; }
+.rating-widget-block label:nth-child(4):before { content: ""; }
+.rating-widget-block label:nth-child(5):before { content: ""; }
+
+.rating-widget-block {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 87%;
+    margin-bottom: 10px;
+}
+
+.rating-widget-block input[type="radio"] {
+  display: none;
+  order: 2;
+}
+.rating-widget-block label {
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0;
+  display: inline-block;
+  order: 1;
+}
+
+
+
+/* // */
+</style>
+<main class="inner-page-sec-padding-bottom">
+  <div class="container" style="margin: 20px 400px;">
+    <div class="row" style="display: flex; margin-bottom: 60px;">
+      <div class="col-lg-5 mb--30">
+        <!-- Product Details Slider Big Image-->
+        <div class="product-details-slider sb-slick-slider arrow-type-two">
+          
+          <div class="single-slide" >
+            <img  src="<%= detailProducts.imageURL %>" alt="" style="width: 445px; border-radius: 10px; height: 440px;">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7" style="padding-left: 30px;">
+        <div class="product-details-info pl-lg--30 ">
+          <h3 class="product-title" style="font-size: 23px; "><%= detailProducts.title %></h3>
+
+          <div class="price-block" style="font-size: 20px;">
+            <span class="price-new" style="color:#71b042 ; font-size: 18px; padding: 10px 0px;"><%= formatNumber(detailProducts.price) %>$</span>
+          </div>
+          <div class="rating-widget" style="padding-bottom: 80px;">
+            <div class="rating-block" style="font-size: 20px;">
+              <% for (let i = 1; i <= 5; i++) { %>
+              <span style="color:#eccd00;" class="fas fa-star <%= detailProducts.average_score >= i ? 'star_on' : '' %>"></span>
+              <% } %>
+            </div>
+            <div class="comment-add" style="margin: 40px 0px 100px 0px;">
+              <p><%= detailProducts.description %> </p>
+            </div>
+            
+          </div>
+          
+          <form id='myform' method='POST' class='quantity' action='#' style=" text-align: center;padding: 5px; width: 40px; height: 25px; display: contents;">
+            <input type='button' value='-' class='qtyminus minus' field='quantity' style="width: 25px; height: 25px;" />
+            <input type='text' name='quantity' value='0' class='qty'  style="width: 30px; text-align: center;"/>
+            <input type='button' value='+' class='qtyplus plus' field='quantity' style="width: 25px; height: 25px;"/>
+          </form>
+          <div class="add-to-cart-row">
+            <div class="add-cart-btn" style="margin-top: 5px;">
+              <button type="submit" id="addToCart" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to
+                Cart</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="sb-custom-tab review-tab section-padding">
+      <div  >
+          <div class="review-wrapper">
+            <h2 class="title-lg mb--20" style="text-transform: uppercase; font-size: 16px;">REVIEW FOR <%= detailProducts.title %></h2>
+            <!-- comment -->
+            <% comments.forEach(function(comment) {
+              console.log(comments) %>
+              
+
+            <div class="review-comment mb--20" style="margin-bottom: 20px; display: flex;">
+              <div class="avatar">
+                <img src="https://i.imgur.com/bbnrc1T.png" alt="" style="width: 60px; margin-right: 10px;">
+              </div>
+              <div class="text">
+                <div class="rating-block mb--15">
+                  <% for (let i = 1; i <= 5; i++) { %>
+                  <span class="fa-regular fa-star <%= comment.rating >= i ? 'star_on' : '' %>"></span>
+                  <% } %>
+                </div>
+                <h6 class="author"><%= comment.email %> – <span class="font-weight-400"><%= new Date(comment.createdAt).toLocaleString() %></span>
+                </h6>
+                <input type="hidden" id="idComment_<%= comment._id %>" value="<%= comment._id %>">
+                <input class="button-ouline" id="editlistcomment_<%= comment._id %>" name="editlistcomment" value="<%= comment.comment %>" />
+                <div class="d-flex gap-2" style="margin-top: 20px;">
+                  <button id="editComment_<%= comment._id %>" type="submit" class=" text-info font-weight-400 ">Edit</button> 
+                  <button id="deleteComment_<%= comment._id %>" class="text-danger font-weight-400">Delete</button>
+                </div>
+              </div>
+
+            </div>
+            <!-- edit comment -->
+            <script>
+              $(document).on("click", "#editComment_<%= comment._id %>", function() {
+                $("#editlistcomment_<%= comment._id %>").removeClass('button-ouline');
+                $(this).attr('id', 'updateComment_<%= comment._id %>').text('Update');
+              });
+
+              // update 
+
+              $(document).on("click", "#updateComment_<%= comment._id %>", function() {
+                $.ajax({
+                  type: "POST",
+                  dataType: "JSON",
+                  url: "/updateComment",
+                  data: {
+                    type: 'updateComment',
+                    idEditComment: $("#idComment_<%= comment._id %>").val(),
+                    editlistcomment: $("#editlistcomment_<%= comment._id %>").val(),
+                  },
+                  success: function(res) {
+                    Swal.fire({
+                      icon: res.status === true ? "success" : "error",
+                      title: 'Thông Báo',
+                      text: res.message
+                    }).then((result) => {
+                      if (res.status === true) {
+                        window.location.href = "/detail/<%= detailProducts.title %>"
+                      } else {
+                       
+                      }
+                    });
+                  },
+                  error: function(xhr, status, error) {
+                    console.error('edit lỗi',error);
+                  },
+                });
+              });
+
+              // delete h
+
+              $(document).on("click", "#deleteComment_<%= comment._id %>", function() {
+                $.ajax({
+                  type: "POST",
+                  dataType: "JSON",
+                  url: "/deleteComment",
+                  data: {
+                    type: 'deleteComment',
+                    idDeleteComment: $("#idComment_<%= comment._id %>").val(),
+                  },
+                  success: function(res) {
+                    Swal.fire({
+                      icon: res.status === true ? "success" : "error",
+                      title: 'Thông Báo',
+                      text: res.message
+                    }).then((result) => {
+                      if (res.status === true) {
+                        window.location.href = "/detail/<%= detailProducts.title %>"
+                      } else {
+                      
+                      }
+                    });
+                  },
+                  error: function(xhr, status, error) {
+                    console.error('delete lỗi',error);
+                  },
+                });
+              });
+            </script>
+          <% }) %>
+            <!-- end comment -->
+            <h2 class="title-lg mb--20 pt--15" style="padding-top: 15px; margin-bottom: 20px;">ADD A REVIEW</h2>
+            <div class="rating-row pt-2">
+              <p class="d-block" style="color:#777777; font-size: 13px; margin-bottom: 10px;">Your Rating</p>
+              <span class="rating-widget-block">
+                <input type="radio" name="star" value="5" id="star_5">
+                <label for="star_5"></label>
+                <input type="radio" name="star" value="4" id="star_4">
+                <label for="star_4"></label>
+                <input type="radio" name="star" value="3" id="star_3">
+                <label for="star_3"></label>
+                <input type="radio" name="star" value="2" id="star_2">
+                <label for="star_2"></label>
+                <input type="radio" name="star" value="1" id="star_1">
+                <label for="star_1"></label>
+              </span>
+
+
+
+
+    
+
+              <div class="mt--15 site-form ">
+                <div class="row">
+                  <div class="col-12">
+                    <input type="hidden" name="slugProduct" value="<%= detailProducts.title%>" id="slugProduct" >
+                    <div class="form-group">
+                      
+                      <textarea placeholder="Comment..."  name="message" id="message" cols="150" rows="10" class="form-control" style="background: #eeeeee; padding: 20px; border-radius: 10px;"  ></textarea>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="submit-btn">
+                      <button type="submit" id="addComment" class="btn btn-black">Post Comment</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+  
+</main>
+</div>
+
+
+<script>
+  // Gửi Data
+  $("#addComment").on("click", function() {
+    console.log("add");
+    var rating = $("input[name='star']:checked").val();
+    $.ajax({
+      type: "POST",
+      dataType: "JSON",
+      url: "/postComment",
+      data: {
+        type: 'Comment',
+        star: rating,
+        slugProduct: $("#slugProduct").val(),
+        message: $("#message").val(),
+      },
+      success: function(res) {
+        Swal.fire({
+          icon: res.status === true ? "success" : "error",
+          title: 'Thông Báo',
+          text: res.message
+        }).then((result) => {
+          if (res.status === true) {
+            window.location.href = "/detail/<%= detailProducts.title %>"
+          } else {
+
+          }
+        });
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      },
+    });
+  });
+</script>
+
+<%- include('layouts/footer.ejs') %>
+
+

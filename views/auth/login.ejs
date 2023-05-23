@@ -1,0 +1,170 @@
+<%- include('../layouts/header.ejs') %> <%- include('../layouts/navigation.ejs')
+%>
+
+<link
+  href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+  .colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    border-radius: 5px;
+    background-image: -webkit-linear-gradient(
+      left,
+      #c4e17f,
+      #c4e17f 12.5%,
+      #f7fdca 12.5%,
+      #f7fdca 25%,
+      #fecf71 25%,
+      #fecf71 37.5%,
+      #f0776c 37.5%,
+      #f0776c 50%,
+      #db9dbe 50%,
+      #db9dbe 62.5%,
+      #c49cde 62.5%,
+      #c49cde 75%,
+      #669ae1 75%,
+      #669ae1 87.5%,
+      #62c2e4 87.5%,
+      #62c2e4
+    );
+    background-image: -moz-linear-gradient(
+      left,
+      #c4e17f,
+      #c4e17f 12.5%,
+      #f7fdca 12.5%,
+      #f7fdca 25%,
+      #fecf71 25%,
+      #fecf71 37.5%,
+      #f0776c 37.5%,
+      #f0776c 50%,
+      #db9dbe 50%,
+      #db9dbe 62.5%,
+      #c49cde 62.5%,
+      #c49cde 75%,
+      #669ae1 75%,
+      #669ae1 87.5%,
+      #62c2e4 87.5%,
+      #62c2e4
+    );
+    background-image: -o-linear-gradient(
+      left,
+      #c4e17f,
+      #c4e17f 12.5%,
+      #f7fdca 12.5%,
+      #f7fdca 25%,
+      #fecf71 25%,
+      #fecf71 37.5%,
+      #f0776c 37.5%,
+      #f0776c 50%,
+      #db9dbe 50%,
+      #db9dbe 62.5%,
+      #c49cde 62.5%,
+      #c49cde 75%,
+      #669ae1 75%,
+      #669ae1 87.5%,
+      #62c2e4 87.5%,
+      #62c2e4
+    );
+    background-image: linear-gradient(
+      to right,
+      #c4e17f,
+      #c4e17f 12.5%,
+      #f7fdca 12.5%,
+      #f7fdca 25%,
+      #fecf71 25%,
+      #fecf71 37.5%,
+      #f0776c 37.5%,
+      #f0776c 50%,
+      #db9dbe 50%,
+      #db9dbe 62.5%,
+      #c49cde 62.5%,
+      #c49cde 75%,
+      #669ae1 75%,
+      #669ae1 87.5%,
+      #62c2e4 87.5%,
+      #62c2e4
+    );
+  }
+</style>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+  <div class="row" style="margin-top: 20px">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+      <form role="form">
+        <fieldset>
+          <h2>Login</h2>
+          <hr class="colorgraph" />
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              class="form-control input-lg"
+              placeholder="Email Address"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              class="form-control input-lg"
+              placeholder="Password"
+            />
+          </div>
+          <span class="button-checkbox">
+            <a href="" class="btn btn-link pull-right">Forgot Password?</a>
+          </span>
+          <hr class="colorgraph" />
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+              <a href="#" id="Login" class="btn btn-lg btn-success btn-block"
+                >Login</a
+              >
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  $(function () {
+    //data
+    // Gửi Data
+    $("#Login").on("click", function () {
+      $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: "/postLoginUser",
+        data: {
+          type: "Login",
+          email: $("#email").val(),
+          password: $("#password").val(),
+        },
+        success: function (res) {
+          Swal.fire({
+            icon: res.status === true ? "success" : "error",
+            title: "Thông Báo",
+            text: res.message,
+          }).then((result) => {
+            if (res.status === true) {
+              window.location.href = "/";
+            } else {
+              window.location.href = "/login";
+            }
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        },
+      });
+    });
+  });
+</script>
+<%- include('../layouts/footer.ejs') %>

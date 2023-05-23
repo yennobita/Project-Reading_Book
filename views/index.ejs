@@ -1,0 +1,410 @@
+<%- include('layouts/header.ejs') %> <%- include('layouts/navigation.ejs' ) %>
+<% function formatNumber(num) { if (num == null) { return "0"; } return
+num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"); } %>
+
+<!-------- home section start ----------->
+
+<!-- style -->
+<style>
+  #product_area {
+    position: relative;
+    padding-top: 0;
+  }
+
+  .mix {
+    display: none;
+  }
+  .product_item .mix {
+    display: none;
+  }
+  .product_filter {
+    margin-bottom: 10px;
+  }
+  .product_filter ul {
+    margin: 0px 0 40px;
+    padding: 0;
+    list-style: none;
+  }
+  .product_filter ul li {
+    font-weight: 400;
+    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    padding: 12px 22px;
+    font-size: 13px;
+    border: 1px solid transparent;
+    transition: 0.5s;
+    letter-spacing: 1px;
+    border-radius: 20px;
+    margin: 0px;
+    color: #777;
+    line-height: 1;
+  }
+  .product_filter .filter.active {
+    color: #33d286;
+    border-color: #33d286;
+  }
+
+  .single_product {
+    text-align: center;
+    margin: 50px 100px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    padding-bottom: 20px;
+    background: #fff;
+    transition: 0.5s;
+  }
+  .single_product:hover {
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.03);
+  }
+  .product_image {
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+  }
+  .product_image img {
+    width: 230px;
+    height: 240px;
+    transition: all 1.5s ease 0s;
+  }
+
+  .single_product:hover img {
+    transform: scale(1.2);
+  }
+  .single_product .box-content {
+    width: 100%;
+    padding: 10px 10px;
+    background: #fff;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    z-index: 1;
+    transition: all 0.6s ease 0s;
+    overflow: hidden;
+    opacity: 0;
+    background: rgba(51, 210, 134, 0.9);
+  }
+  .single_product:hover .box-content {
+    bottom: 0;
+    opacity: 1;
+  }
+  .box-content a {
+    display: inline-block;
+    color: #333;
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin: 0 7px;
+    transition: 0.5s;
+  }
+  .box-content a:hover {
+    color: #33d286;
+    border-color: #fff;
+  }
+
+  .product_btm_text p {
+    color: #8e8e8e;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  .product_btm_text h4 {
+    text-transform: capitalize;
+    margin-top: 17px;
+    margin-bottom: 6px;
+    font-size: 17px;
+  }
+  .product_btm_text h4,
+  .product_btm_text h4 a {
+    color: #333;
+  }
+
+  .new_badge {
+    display: inline-block;
+    background: #33d286;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 14px;
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    border-radius: 2px;
+  }
+  .single_product span.price {
+    color: #33d286;
+    font-size: 16px;
+  }
+  .no-padding {
+    padding: 0;
+  }
+  .p_rating {
+    color: #fec42d;
+    cursor: pointer;
+  }
+</style>
+
+<!-- // -->
+<section class="home" id="home">
+  <div class="row">
+    <div class="content">
+      <h3>upto 55% offers</h3>
+      <p>Discounts on all books when purchased at the store.</p>
+      <a href="" class="btn">shop now</a>
+    </div>
+
+    <div class="swiper books-list">
+      <div class="swiper-wrapper">
+        <a href="" class="swiper-slide" style="width: auto"
+          ><img src="./image/book-1.png" alt=""
+        /></a>
+        <a href="" class="swiper-slide" style="width: auto"
+          ><img src="./image/book-2.png" alt=""
+        /></a>
+        <a href="" class="swiper-slide" style="width: auto"
+          ><img src="./image/book-3.png" alt=""
+        /></a>
+        <a href="" class="swiper-slide" style="width: auto"
+          ><img src="./image/book-4.png" alt=""
+        /></a>
+        <a href="" class="swiper-slide" style="width: auto"
+          ><img src="./image/book-5.png" alt=""
+        /></a>
+        <a href="" class="swiper-slide" style="width: auto"
+          ><img src="./image/book-6.png" alt=""
+        /></a>
+      </div>
+
+      <img src="./image/stand.png" class="stand" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-------- home section ends  ----------->
+
+<!-------- icons section start  ----------->
+
+<section class="icons-container">
+  <div class="icons">
+    <i class="fas fa-plane"></i>
+    <div class="content">
+      <h3>over payment</h3>
+      <p>over payment $100</p>
+    </div>
+  </div>
+
+  <div class="icons">
+    <i class="fas fa-lock"></i>
+    <div class="content">
+      <h3>secure payment</h3>
+      <p>secure payment $100</p>
+    </div>
+  </div>
+
+  <div class="icons">
+    <i class="fas fa-headset"></i>
+    <div class="content">
+      <h3>24/7 support</h3>
+      <p>call us anythin</p>
+    </div>
+  </div>
+</section>
+
+<!-------- icons section ends  ----------->
+<!-------- featured section start  ----------->
+
+<!-------- featured section ends  ----------->
+
+<!-- // -->
+<div class="product_item" style="text-align: center">
+  <div class="heading"><span>New books</span></div>
+  <% products.forEach((product) => { %>
+  <div
+    class="col-2 mix sale search-pr"
+    style="display: inline-block; width: 420px"
+    data-bound=""
+  >
+    <div class="single_product">
+      <div class="product_image">
+        <img src="<%= product.imageURL %>" alt="" />
+        <div class="new_badge">New</div>
+        <div class="box-content">
+          <a href="#"><i class="fa fa-heart"></i></a>
+          <a href="#"><i class="fa fa-cart-plus"></i></a>
+          <a href="#"><i class="fa fa-search"></i></a>
+        </div>
+      </div>
+
+      <div class="product_btm_text">
+        <h4>
+          <a class="text-title" href="/detail/<%= product.title %>"
+            ><%= product.title %></a
+          >
+        </h4>
+        <div class="p_rating">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <span class="price"><%= product.price %>$</span>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+</div>
+
+<!-- // -->
+<section class="newsletter">
+  <form action="">
+    <h3>subcribe for latest update</h3>
+    <input type="email" name="" placeholder="enter your email" class="box" />
+    <input type="submit" value="subcribe" class="btn" />
+  </form>
+</section>
+
+<!-- // -->
+<section class="deal">
+  <div class="content">
+    <h3>deal of the day</h3>
+    <h1>upto 50% offers</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, vero.
+      Voluptatibus voluptates inventore nulla vel.
+    </p>
+    <a href="" class="btn">shop now</a>
+  </div>
+
+  <div class="image">
+    <img src="./image/deal-img.jpg" alt="" />
+  </div>
+</section>
+
+<!-- // -->
+<!-------- blog section start  ----------->
+
+<section class="blogs" id="blogs">
+  <div class="heading"><span>our blogs</span></div>
+
+  <div class="swiper blog-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide box">
+        <div class="image">
+          <img src="./image/blog-1.jpg" alt="" />
+        </div>
+
+        <div class="content">
+          <h3>blog title goes here</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quaerat,
+            ipsam minima suscipit neque quisquam.
+          </p>
+          <a href="" class="btn">read more</a>
+        </div>
+      </div>
+
+      <div class="swiper-slide box">
+        <div class="image">
+          <img src="./image/blog-2.jpg" alt="" />
+        </div>
+
+        <div class="content">
+          <h3>blog title goes here</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quaerat,
+            ipsam minima suscipit neque quisquam.
+          </p>
+          <a href="" class="btn">read more</a>
+        </div>
+      </div>
+
+      <div class="swiper-slide box">
+        <div class="image">
+          <img src="./image/blog-3.jpg" alt="" />
+        </div>
+
+        <div class="content">
+          <h3>blog title goes here</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quaerat,
+            ipsam minima suscipit neque quisquam.
+          </p>
+          <a href="" class="btn">read more</a>
+        </div>
+      </div>
+
+      <div class="swiper-slide box">
+        <div class="image">
+          <img src="./image/blog-4.jpg" alt="" />
+        </div>
+
+        <div class="content">
+          <h3>blog title goes here</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quaerat,
+            ipsam minima suscipit neque quisquam.
+          </p>
+          <a href="" class="btn">read more</a>
+        </div>
+      </div>
+
+      <div class="swiper-slide box">
+        <div class="image">
+          <img src="./image/blog-5.jpg" alt="" />
+        </div>
+
+        <div class="content">
+          <h3>blog title goes here</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quaerat,
+            ipsam minima suscipit neque quisquam.
+          </p>
+          <a href="" class="btn">read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $("#search-box")
+    .autocomplete({
+      source: function (req, res) {
+        $.ajax({
+          url: "autocomplete/",
+          dataType: "json",
+          type: "GET",
+          data: req,
+          success: function (data) {
+            res(data);
+            console.log(data);
+          },
+          error: function (err) {
+            console.log(err);
+          },
+        });
+      },
+      minLength: 1,
+      select: function (event, ui) {
+        if (ui.item) {
+          window.location.href = "/detail/" + ui.item.label; // Chuyển hướng tới trang chi tiết sản phẩm với id của sản phẩm được chọn
+        }
+      },
+    })
+    .autocomplete("instance")._renderItem = function (ul, item) {
+    return $("<li>")
+      .append(
+        "<div class='autocomplete-item'><img src='" +
+          item.imageURL + // Sử dụng trường imageURL để hiển thị hình ảnh
+          "' style='width: 100px'/><span>" +
+          item.label +
+          "</span></div>"
+      )
+      .appendTo(ul);
+  };
+</script>
+<%- include('layouts/footer.ejs') %>

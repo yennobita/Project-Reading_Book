@@ -1,0 +1,126 @@
+<%- include('layouts/head.ejs')%>
+<style>
+  button {
+ width: 100px;
+ height: 30px;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ background: red;
+ border: none;
+ border-radius: 5px;
+ box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+ background: #e62222;
+}
+
+button, button span {
+ transition: 200ms;
+}
+
+button .text {
+ transform: translateX(7px);
+ color: white;
+ font-weight: bold;
+ font-size: 13px;
+}
+
+button .icon {
+ position: absolute;
+ border-left: 1px solid #c41b1b;
+ transform: translateX(60px);
+ height: 30px;
+ width: 30px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+button svg {
+ width: 13px;
+ fill: #eee;
+}
+
+button:hover {
+ background: #ff3636;
+}
+
+button:hover .text {
+ color: transparent;
+}
+
+button:hover .icon {
+ width: 150px;
+ border-left: none;
+ transform: translateX(-33px);
+}
+
+button:focus {
+ outline: none;
+}
+
+button:active .icon svg {
+ transform: scale(0.8);
+}
+</style>
+<body>
+  <%- include('layouts/navigation2.ejs')%>
+      <div class="container">
+          <div class="table-responsive">
+              <div class="table-wrapper">
+                  <div class="table-title">
+                      <div class="row ">
+                          <div class="col-xs-6">
+                            </div>
+                            <div class="col-xs-6">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 157px">#</th>
+                                <th style="width: 100px">Image</th>
+                                <th style="width: 200px">Name Product</th>
+                                <th>Price</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                  <% for(let p of prods) {%>
+                <tr>
+                  <td><%= p.id%></td>
+                  <td><img class="card-img-top" src="<%= p.imageURL%>" alt="" width="30px"></td>
+                  <td><%= p.title%></td>
+                  <td><%= p.price%>$</td>
+                  <td><%= p.description%></td>
+                  <td style="display: flex;">
+                    <a style="margin-right: 20px; text-decoration: none;"
+                      href="/admin/edit-product/<%=p._id%>"
+                      class="edit"
+                      title="Edit"
+                      data-toggle="tooltip"
+                      ><i class="material-icons">&#9997;</i></a
+                    >
+                    <form action="/admin/delete-product" method="POST">
+                      <input type="hidden" name="id" value="<%=p._id%>">
+                      <button type="submit" class="noselect"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+                    </form>
+                  </form>
+                    
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+
+    <script src="assets/js/script/js"></script>
+    </body>
+  </html>
+</body>
